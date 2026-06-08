@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestNG örnekleri">
+    <test name="Temel pratikler">
+        <classes>
+            <class name="MyTests"/>
+            <class name="TrendyolTests"/>
+        </classes>
+    </test>
+</suite>
