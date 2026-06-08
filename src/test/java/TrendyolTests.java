@@ -42,7 +42,8 @@ public class TrendyolTests {
     @Test(priority = 1)
     public void testSearchProduct() throws InterruptedException {
         driver.get("https://www.trendyol.com/");
-        driver.findElement(By.xpath("//div[@class='modal-action-button' and text()='Kadın']")).click();
+        driver.findElement(By.xpath("//img[@src='https://cdn.dsmcdn.com/sfint/prod/fp/woman_1754995993612.svg']")).click();
+
         driver.findElement(By.cssSelector(".suggestion-placeholder")).click();
         WebElement searchBar = driver.findElement(By.xpath("//input[@data-testid='browsing-search-input']"));
         searchBar.click();

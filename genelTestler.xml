@@ -3,7 +3,6 @@
 <suite name="TestNG örnekleri">
     <test name="Temel pratikler">
         <classes>
-            <class name="MyTests"/>
             <class name="TrendyolTests"/>
         </classes>
     </test>
