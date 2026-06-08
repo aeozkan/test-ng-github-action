@@ -1,0 +1,50 @@
+name: Selenium TestNG Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Manuel tetikleme butonu
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu indir
+        uses: actions/checkout@v4
+
+      - name: Java 23 kur
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23'
+          distribution: 'temurin'
+
+      - name: Chrome ve ChromeDriver kur
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Maven bağımlılıklarını cache'le
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Testleri çalıştır (headless)
+        run: mvn clean test -Dsurefire.suiteXmlFiles=genelTestler.xml
+        env:
+          DISPLAY: :99  # headless ortam için
+
+      - name: Test raporlarını yükle
+        uses: actions/upload-artifact@v4
+        if: always()  # test başarısız olsa bile raporu yükle
+        with:
+          name: testng-reports
+          path: |
+            target/surefire-reports/
+            target/test-classes/
+          retention-days: 7
