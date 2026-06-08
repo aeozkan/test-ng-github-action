@@ -29,6 +29,9 @@ public class TrendyolTests {
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-gpu"); // Windows sistemlerde kararlılık için önerilir
         options.addArguments("--no-sandbox");
+        options.addArguments("--headless=new");          // ← EKLE
+        options.addArguments("--window-size=1920,1080"); // ← EKLE
+        options.addArguments("--disable-dev-shm-usage"); // ← EKLE (Linux'ta bellek sorunu önler)
         // 4. Driver'ı bu options ile başlat (EN KRİTİK ADIM)
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
